@@ -1,46 +1,52 @@
 using UnityEngine;
-using System.Collections.Generic;
+using System.IO;
 
-public class RegistroDeTiempos : MonoBehaviour
+public class InputManager : MonoBehaviour
 {
-    private Dictionary<KeyCode, List<float>> tiemposPorTecla = new Dictionary<KeyCode, List<float>>();
+    private float startTime;
+    private StreamWriter fileWriter;
 
-    void Update()
+    private float totalTimeElapsed = 0f;
+
+    private void Start()
     {
-        // Verifica las teclas 1, 2, 3 y 4
-        foreach (KeyCode tecla in new KeyCode[] { KeyCode.Alpha1, KeyCode.Alpha2, KeyCode.Alpha3, KeyCode.Alpha4 })
+        // Abre o crea el archivo en la carpeta "Assets"
+        fileWriter = new StreamWriter(Application.dataPath + "/tiempos.txt", true);
+
+        // Inicia el temporizador
+        startTime = Time.time;
+    }
+
+    private void Update()
+    {
+        // Actualiza el tiempo total transcurrido
+        totalTimeElapsed += Time.deltaTime;
+
+        // Comprueba las teclas 1, 2, 3 y 4
+        if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
+            Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
         {
-            if (Input.GetKeyDown(tecla))
-            {
-                RegistrarTiempo(tecla);
-            }
+            float elapsedTime = Time.time - startTime;
+            int keyNumber = GetPressedKeyNumber();
+
+            // Escribe en el archivo la tecla presionada y el tiempo
+            fileWriter.WriteLine("Tecla " + keyNumber + ": " + elapsedTime.ToString("F2") + " segundos desde el inicio del juego");
         }
     }
 
-    private void RegistrarTiempo(KeyCode tecla)
+    private int GetPressedKeyNumber()
     {
-        if (!tiemposPorTecla.ContainsKey(tecla))
-        {
-            tiemposPorTecla[tecla] = new List<float>();
-        }
-
-        float tiempoActual = Time.time;
-        tiemposPorTecla[tecla].Add(tiempoActual);
-
-        Debug.Log("Tecla '" + tecla.ToString() + "' presionada en el tiempo: " + tiempoActual);
+        // Devuelve el número de la tecla presionada (1, 2, 3 o 4)
+        if (Input.GetKeyDown(KeyCode.Alpha1)) return 1;
+        if (Input.GetKeyDown(KeyCode.Alpha2)) return 2;
+        if (Input.GetKeyDown(KeyCode.Alpha3)) return 3;
+        if (Input.GetKeyDown(KeyCode.Alpha4)) return 4;
+        return 0; // Valor por defecto
     }
 
-    public List<float> ObtenerTiemposPorTecla(KeyCode tecla)
+    private void OnDestroy()
     {
-        if (tiemposPorTecla.ContainsKey(tecla))
-        {
-            return tiemposPorTecla[tecla];
-        }
-        else
-        {
-            return new List<float>();
-        }
+        // Cierra el archivo al destruir el objeto
+        fileWriter.Close();
     }
 }
-
-
