@@ -16,11 +16,10 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Vector3 spawnPositionPrefab4 = new Vector3(4f, 0f, 0f);
 
     [Header("Destruction Time")]
-    [SerializeField] private float destructionTime = 3f;
+    [SerializeField] private float destructionTime = 2.05f;
 
     private void Start()
     {
-        // Lee el archivo "tiempos - copia.txt"
         string filePath = Application.dataPath + "/tiempos - copia.txt";
 
         if (File.Exists(filePath))
@@ -29,28 +28,28 @@ public class SpawnManager : MonoBehaviour
 
             foreach (string line in lines)
             {
-                // Divide la línea para obtener la tecla y el tiempo
                 string[] parts = line.Split(':');
-                
+
                 if (parts.Length == 2)
                 {
                     string key = parts[0].Trim();
-                    float time = float.Parse(parts[1].Split(' ')[1].Trim()); // Extrae el tiempo y conviértelo a float
+                    float time = float.Parse(parts[1].Split(' ')[1].Trim());
 
-                    // Usa la función Invoke para retrasar la instanciación y la destrucción según el tiempo
+                    float adjustedTime = Mathf.Max(0, time - 2.05f);
+
                     switch (key)
                     {
                         case "Tecla 1":
-                            Invoke("SpawnAndDestroyPrefab1", time);
+                            Invoke("SpawnAndDestroyPrefab1", adjustedTime);
                             break;
                         case "Tecla 2":
-                            Invoke("SpawnAndDestroyPrefab2", time);
+                            Invoke("SpawnAndDestroyPrefab2", adjustedTime);
                             break;
                         case "Tecla 3":
-                            Invoke("SpawnAndDestroyPrefab3", time);
+                            Invoke("SpawnAndDestroyPrefab3", adjustedTime);
                             break;
                         case "Tecla 4":
-                            Invoke("SpawnAndDestroyPrefab4", time);
+                            Invoke("SpawnAndDestroyPrefab4", adjustedTime);
                             break;
                         default:
                             Debug.LogWarning("Tecla no reconocida: " + key);
@@ -87,5 +86,10 @@ public class SpawnManager : MonoBehaviour
     {
         GameObject instance = Instantiate(prefab4, spawnPositionPrefab4, Quaternion.identity);
         Destroy(instance, destructionTime);
+    }
+
+    public float GetDestructionTime()
+    {
+        return destructionTime;
     }
 }
