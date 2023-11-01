@@ -997,12 +997,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 665214b355757584b860499a1a936426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  notaRojaPrefab: {fileID: 3205745949004044537, guid: 7fbe08d6da9ba364fb6d37ed8f8519dd, type: 3}
-  notaAzulPrefab: {fileID: 6863491929067049826, guid: 572a48ad7581cb74bacd30dfea7bdc04, type: 3}
-  notaVerdePrefab: {fileID: 8680705686385755685, guid: f53102f9779475c42a8ce45a95c344bb, type: 3}
-  notaAmarillaPrefab: {fileID: 1056049723167252155, guid: 4287ee1e8cdba2f47ac34d3395bfb01e, type: 3}
-  targetPositionY: -4.25
-  yErrorMargin: 5
+  tiemposFileName: tiempos - copia.txt
+  tiempoMargen: 1
 --- !u!4 &2024855546
 Transform:
   m_ObjectHideFlags: 0
