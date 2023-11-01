@@ -26,7 +26,8 @@ public class InputManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) || Input.GetKeyDown(KeyCode.Alpha2) ||
             Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
         {
-            float elapsedTime = Time.time - startTime;
+            float elapsedTime = totalTimeElapsed; // Cambia aquí para obtener el tiempo total
+
             int keyNumber = GetPressedKeyNumber();
 
             // Escribe en el archivo la tecla presionada y el tiempo

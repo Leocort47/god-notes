@@ -968,6 +968,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tecla: 50
   colorPresionado: {r: 0, g: 0.52991295, b: 1, a: 0}
+--- !u!1 &2024855544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2024855546}
+  - component: {fileID: 2024855545}
+  m_Layer: 0
+  m_Name: cheked
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2024855545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024855544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 665214b355757584b860499a1a936426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  notaRojaPrefab: {fileID: 3205745949004044537, guid: 7fbe08d6da9ba364fb6d37ed8f8519dd, type: 3}
+  notaAzulPrefab: {fileID: 6863491929067049826, guid: 572a48ad7581cb74bacd30dfea7bdc04, type: 3}
+  notaVerdePrefab: {fileID: 8680705686385755685, guid: f53102f9779475c42a8ce45a95c344bb, type: 3}
+  notaAmarillaPrefab: {fileID: 1056049723167252155, guid: 4287ee1e8cdba2f47ac34d3395bfb01e, type: 3}
+  targetPositionY: -4.25
+  yErrorMargin: 5
+--- !u!4 &2024855546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2024855544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.871568, y: 0.28775907, z: -0.46498394}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -981,3 +1031,4 @@ SceneRoots:
   - {fileID: 1509518624}
   - {fileID: 894776422}
   - {fileID: 470301446}
+  - {fileID: 2024855546}
