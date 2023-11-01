@@ -1,18 +1,21 @@
 using UnityEngine;
+using System.IO;
+using System.Collections; // Añadir esta línea
 
 public class InputChecker : MonoBehaviour
 {
+    [SerializeField] private string tiemposFileName = "tiempos - copia.txt";
+    private string filePath;
+    private float startTime;
     private KeyCode lastKeyPressed;
 
-    [Header("Prefab Settings")]
-    [SerializeField] private GameObject notaRojaPrefab;
-    [SerializeField] private GameObject notaAzulPrefab;
-    [SerializeField] private GameObject notaVerdePrefab;
-    [SerializeField] private GameObject notaAmarillaPrefab;
+    [Header("Margen de Tiempo")]
+    [SerializeField] private float tiempoMargen = 1f;
 
-    [Header("Position Settings")]
-    [SerializeField] private float targetPositionY = -4.25f; // Posición objetivo en el eje Y
-    [SerializeField] private float yErrorMargin = 5f; // Margen de error en el eje Y
+    private void Start()
+    {
+        filePath = Application.dataPath + "/" + tiemposFileName;
+    }
 
     private void Update()
     {
@@ -20,7 +23,8 @@ public class InputChecker : MonoBehaviour
             Input.GetKeyDown(KeyCode.Alpha3) || Input.GetKeyDown(KeyCode.Alpha4))
         {
             lastKeyPressed = GetLastPressedKey();
-            CheckInput(lastKeyPressed);
+            startTime = Time.time; // Registra el tiempo cuando se presiona una tecla
+            StartCoroutine(ReadFileAndCheckInput());
         }
     }
 
@@ -33,57 +37,62 @@ public class InputChecker : MonoBehaviour
         return KeyCode.None;
     }
 
-    private void CheckInput(KeyCode keyCode)
+    private IEnumerator ReadFileAndCheckInput()
     {
-        GameObject prefabToCheck = GetPrefabForKeyCode(keyCode);
-
-        if (prefabToCheck != null)
+        if (File.Exists(filePath))
         {
-            if (IsPrefabWithinYRange(prefabToCheck))
+            string[] lines = File.ReadAllLines(filePath);
+
+            foreach (string line in lines)
             {
-                Debug.Log("Tecla correcta y dentro del margen de error: " + keyToString(keyCode));
-            }
-            else
-            {
-                Debug.Log("Tecla correcta, pero fuera del margen de error: " + keyToString(keyCode));
+                string[] parts = line.Split(':');
+
+                if (parts.Length == 2)
+                {
+                    string key = parts[0].Trim();
+                    float tiempoRegistrado;
+
+                    if (float.TryParse(parts[1].Split(' ')[1].Trim(), out tiempoRegistrado))
+                    {
+                        float tiempoDiferencia = Mathf.Abs(tiempoRegistrado - startTime - Time.time);
+
+                        Debug.Log($"Tecla: {key}, Tiempo Diferencia: {tiempoDiferencia}, Margen: {tiempoMargen}");
+
+                        // Comprueba si la tecla fue presionada dentro del rango de tiempo (antes y después)
+                        if (lastKeyPressed == keyToKeyCode(key) && tiempoDiferencia <= tiempoMargen)
+                        {
+                            Debug.Log("Tecla correcta en el tiempo indicado: " + key);
+                        }
+                        else
+                        {
+                            Debug.Log("Tecla incorrecta o fuera de tiempo: " + key);
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Error al convertir el tiempo a float en la línea: " + line);
+                    }
+
+                    // Espera antes de comprobar la siguiente línea
+                    yield return new WaitForSeconds(tiempoMargen);
+                }
             }
         }
         else
         {
-            Debug.Log("Tecla incorrecta: " + keyToString(keyCode));
+            Debug.LogError("El archivo " + tiemposFileName + " no existe.");
         }
     }
 
-    private GameObject GetPrefabForKeyCode(KeyCode keyCode)
-    {
-        // Devuelve el prefab correspondiente a la tecla
-        switch (keyCode)
-        {
-            case KeyCode.Alpha1: return notaRojaPrefab;
-            case KeyCode.Alpha2: return notaAzulPrefab;
-            case KeyCode.Alpha3: return notaVerdePrefab;
-            case KeyCode.Alpha4: return notaAmarillaPrefab;
-            default: return null;
-        }
-    }
-
-    private string keyToString(KeyCode key)
+    private KeyCode keyToKeyCode(string key)
     {
         switch (key)
         {
-            case KeyCode.Alpha1: return "Tecla 1";
-            case KeyCode.Alpha2: return "Tecla 2";
-            case KeyCode.Alpha3: return "Tecla 3";
-            case KeyCode.Alpha4: return "Tecla 4";
-            default: return "Ninguna";
+            case "Tecla 1": return KeyCode.Alpha1;
+            case "Tecla 2": return KeyCode.Alpha2;
+            case "Tecla 3": return KeyCode.Alpha3;
+            case "Tecla 4": return KeyCode.Alpha4;
+            default: return KeyCode.None;
         }
     }
-
-    private bool IsPrefabWithinYRange(GameObject prefab)
-    {
-        // Verifica si el prefab está dentro del margen de error en el eje Y
-        float prefabY = prefab.transform.position.y;
-        return Mathf.Abs(prefabY - targetPositionY) <= yErrorMargin;
-    }
 }
-
