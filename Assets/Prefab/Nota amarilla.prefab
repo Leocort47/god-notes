@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5962988089774015746}
   - component: {fileID: 3784461154316976384}
   - component: {fileID: 6858108894831673887}
+  - component: {fileID: 1082477336502461259}
   m_Layer: 0
   m_Name: Nota amarilla
   m_TagString: Untagged
@@ -119,3 +120,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidad: 5
+--- !u!114 &1082477336502461259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1056049723167252155}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8a13abb4f09b849a1880c7165cb408, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
