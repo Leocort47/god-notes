@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 470301446}
   - component: {fileID: 470301445}
-  - component: {fileID: 470301444}
   m_Layer: 0
   m_Name: creacion prefab
   m_TagString: Untagged
@@ -141,19 +140,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &470301444
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 470301443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe52a3564b39dc44dbcd90513e4ad343, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  velocidad: 5
 --- !u!114 &470301445
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +281,8 @@ GameObject:
   - component: {fileID: 588546183}
   - component: {fileID: 588546182}
   - component: {fileID: 588546186}
+  - component: {fileID: 588546188}
+  - component: {fileID: 588546189}
   m_Layer: 0
   m_Name: rojo
   m_TagString: Untagged
@@ -402,6 +390,45 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tecla: 49
   colorPresionado: {r: 1, g: 0, b: 0.0766139, a: 0}
+--- !u!54 &588546188
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588546181}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
+--- !u!114 &588546189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 588546181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93bc68bf65490564f8e42c8fbc9c0c0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &894776420
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,6 +580,7 @@ GameObject:
   - component: {fileID: 1508220955}
   - component: {fileID: 1508220954}
   - component: {fileID: 1508220958}
+  - component: {fileID: 1508220959}
   m_Layer: 0
   m_Name: verde
   m_TagString: Untagged
@@ -660,6 +688,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tecla: 51
   colorPresionado: {r: 0.013375282, g: 1, b: 0, a: 0}
+--- !u!54 &1508220959
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1508220953}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &1509518623
 GameObject:
   m_ObjectHideFlags: 0
@@ -720,7 +775,7 @@ VideoPlayer:
   - 0.276
   m_Url: 
   m_EnabledAudioTracks: 01
-  m_DirectAudioMutes: 00
+  m_DirectAudioMutes: 01
   m_ControlledAudioTrackCount: 1
   m_PlayOnAwake: 1
   m_SkipOnDrop: 1
@@ -741,6 +796,7 @@ GameObject:
   - component: {fileID: 1817271132}
   - component: {fileID: 1817271131}
   - component: {fileID: 1817271130}
+  - component: {fileID: 1817271135}
   m_Layer: 0
   m_Name: amarillo
   m_TagString: Untagged
@@ -848,6 +904,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1817271135
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817271129}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1 &1896777276
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,6 +944,7 @@ GameObject:
   - component: {fileID: 1896777278}
   - component: {fileID: 1896777277}
   - component: {fileID: 1896777281}
+  - component: {fileID: 1896777282}
   m_Layer: 0
   m_Name: azul
   m_TagString: Untagged
@@ -968,56 +1052,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tecla: 50
   colorPresionado: {r: 0, g: 0.52991295, b: 1, a: 0}
---- !u!1 &2024855544
-GameObject:
+--- !u!54 &1896777282
+Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2024855546}
-  - component: {fileID: 2024855545}
-  m_Layer: 0
-  m_Name: cheked
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &2024855545
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024855544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665214b355757584b860499a1a936426, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  notaRojaPrefab: {fileID: 3205745949004044537, guid: 7fbe08d6da9ba364fb6d37ed8f8519dd, type: 3}
-  notaAzulPrefab: {fileID: 6863491929067049826, guid: 572a48ad7581cb74bacd30dfea7bdc04, type: 3}
-  notaVerdePrefab: {fileID: 8680705686385755685, guid: f53102f9779475c42a8ce45a95c344bb, type: 3}
-  notaAmarillaPrefab: {fileID: 1056049723167252155, guid: 4287ee1e8cdba2f47ac34d3395bfb01e, type: 3}
-  targetPositionY: -4.25
-  yErrorMargin: 5
---- !u!4 &2024855546
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2024855544}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.871568, y: 0.28775907, z: -0.46498394}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_GameObject: {fileID: 1896777276}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 14
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -1031,4 +1092,3 @@ SceneRoots:
   - {fileID: 1509518624}
   - {fileID: 894776422}
   - {fileID: 470301446}
-  - {fileID: 2024855546}
