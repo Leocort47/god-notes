@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class ControladorCollider : MonoBehaviour
 {
@@ -11,8 +12,13 @@ public class ControladorCollider : MonoBehaviour
 
     void Start()
     {
+        ReiniciarPuntuacion(); // Llama a la función para reiniciar la puntuación al iniciar el juego
+
         miCollider = GetComponent<Collider>();
         miCollider.enabled = false;
+
+        // Recupera la puntuación almacenada en PlayerPrefs al iniciar la escena
+        puntosTotales = PlayerPrefs.GetInt("PuntuacionTotal", 0);
     }
 
     void Update()
@@ -20,7 +26,7 @@ public class ControladorCollider : MonoBehaviour
         if (Input.GetKeyDown(teclaActiva) && !estaActivo)
         {
             ActivarCollider();
-            Invoke("DesactivarCollider", 0.2f);
+            Invoke("DesactivarCollider", 0.07f);
             Invoke("VerificarColision", 0.5f);
         }
 
@@ -44,11 +50,11 @@ public class ControladorCollider : MonoBehaviour
 
     void VerificarColision()
     {
-        // Verifica si no hubo colisiones después de 0.5 segundos y resta un punto si es el caso
+        // Verifica si no hubo colisiones después de 0.5 segundos
         if (!ColisionDetectada())
         {
-            // No ha habido colisión, resta un punto
-            RestarPunto();
+            // No ha habido colisión
+            // Puedes agregar aquí cualquier lógica adicional si lo deseas
         }
     }
 
@@ -56,7 +62,7 @@ public class ControladorCollider : MonoBehaviour
     {
         // Verifica si hay algún collider en la posición actual del objeto
         Collider[] colliders = Physics.OverlapSphere(transform.position, 0.1f);
-        
+
         // Excluye el propio collider del objeto actual
         foreach (Collider col in colliders)
         {
@@ -76,7 +82,7 @@ public class ControladorCollider : MonoBehaviour
         // Asegúrate de que la colisión no se cuente más de una vez
         if (estaActivo) 
         {
-            // Aumenta la puntuación compartida cada vez que hay una colisión
+            // Aumenta la puntuación cada vez que hay una colisión
             SumarPunto();
         }
     }
@@ -86,13 +92,9 @@ public class ControladorCollider : MonoBehaviour
         puntosTotales++;
         Debug.Log("Punto ganado. Puntos totales: " + puntosTotales);
         ActualizarTextoPuntaje();
-    }
 
-    void RestarPunto()
-    {
-        puntosTotales--;
-        Debug.Log("No hubo colisión después de 0.5 segundos. Punto restado. Puntos totales: " + puntosTotales);
-        ActualizarTextoPuntaje();
+        // Guarda la puntuación en PlayerPrefs cada vez que se suma un punto
+        PlayerPrefs.SetInt("PuntuacionTotal", puntosTotales);
     }
 
     void ActualizarTextoPuntaje()
@@ -102,5 +104,16 @@ public class ControladorCollider : MonoBehaviour
             textoPuntaje.text = "Puntuación: " + puntosTotales;
         }
     }
-}
 
+    void ReiniciarPuntuacion()
+    {
+        // Reinicia la puntuación al valor inicial (en este caso, 0)
+        puntosTotales = 0;
+
+        // Actualiza el texto del puntaje
+        ActualizarTextoPuntaje();
+
+        // Guarda la puntuación reiniciada en PlayerPrefs
+        PlayerPrefs.SetInt("PuntuacionTotal", puntosTotales);
+    }
+}

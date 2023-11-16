@@ -18,6 +18,8 @@ public class SpawnManager : MonoBehaviour
     [Header("Destruction Time")]
     [SerializeField] private float destructionTime = 2.05f;
 
+    private int notasCreadas = 0;  // Variable para contar notas creadas
+
     private void Start()
     {
         string filePath = Application.dataPath + "/tiempos - copia.txt";
@@ -55,8 +57,14 @@ public class SpawnManager : MonoBehaviour
                             Debug.LogWarning("Tecla no reconocida: " + key);
                             break;
                     }
+
+                    // Incrementa la cuenta de notas creadas
+                    notasCreadas++;
                 }
             }
+
+            // Guarda el número total de notas creadas en PlayerPrefs
+            PlayerPrefs.SetInt("NotasCreadas", notasCreadas);
         }
         else
         {
@@ -87,6 +95,8 @@ public class SpawnManager : MonoBehaviour
         GameObject instance = Instantiate(prefab4, spawnPositionPrefab4, Quaternion.identity);
         Destroy(instance, destructionTime);
     }
+
+    // Otros métodos...
 
     public float GetDestructionTime()
     {
